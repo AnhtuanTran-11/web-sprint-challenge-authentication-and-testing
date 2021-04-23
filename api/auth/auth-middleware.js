@@ -1,13 +1,13 @@
 const User = require("../jokes/jokes-model");
 
 async function checkUserAndPassword(req, res, next) {
-  const {username , password} = req.body
+  const { username, password } = req.body;
   if (!username || !password) {
     res.status(422).json({
-      message: "username and password required"
-    })
+      message: "username and password required",
+    });
   } else {
-    next()
+    next();
   }
 }
 
@@ -18,8 +18,23 @@ async function checkUsernameFree(req, res, next) {
       next();
     } else {
       res.status(422).json({
-        message: "username taken"
-      })
+        message: "username taken",
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function checkUsernameExists(req, res, next) {
+  try {
+    const [user] = await User.findBy({ username: req.body.username });
+    if (!user) {
+      res.status(422).json({
+        message: "invalid credentials",
+      });
+    } else {
+      next();
     }
   } catch (err) {
     next(err);
@@ -28,5 +43,6 @@ async function checkUsernameFree(req, res, next) {
 
 module.exports = {
   checkUserAndPassword,
-  checkUsernameFree
+  checkUsernameFree,
+  checkUsernameExists,
 };
