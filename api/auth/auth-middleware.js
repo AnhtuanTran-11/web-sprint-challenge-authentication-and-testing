@@ -1,4 +1,4 @@
-const User = require("../jokes/jokes-model");
+const User = require("./auth-model");
 
 function checkUserAndPassword(req, res, next) {
   if (!req.body.username || !req.body.password) {
@@ -33,7 +33,7 @@ async function checkUsernameExists(req, res, next) {
         message: "invalid credentials",
       });
     } else {
-      req.user = user
+      req.user = user;
       next();
     }
   } catch (err) {
