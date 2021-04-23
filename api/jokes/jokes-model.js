@@ -1,7 +1,7 @@
 const db = require('../../data/dbConfig')
 
 function find() {
-    return db("users").select("id", "username");
+    return db("users").select("id", "username", "password");
   }
   
   /**
@@ -16,7 +16,7 @@ function find() {
    */
   function findById(id) {
     return db("users")
-      .select("id", "username")
+      .select("id", "username", "password")
       .where("id", id)
       .first();
   }
