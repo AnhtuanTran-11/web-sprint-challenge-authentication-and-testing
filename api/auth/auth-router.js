@@ -45,7 +45,7 @@ router.post('/register', checkUserAndPassword, checkUsernameFree, (req, res, nex
  .catch(next)
 });
 
-router.post('/login', checkUsernameExists, (req, res, next) => {
+router.post('/login', checkUsernameExists, checkUserAndPassword, (req, res, next) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
