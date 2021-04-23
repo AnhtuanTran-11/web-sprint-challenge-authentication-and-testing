@@ -16,11 +16,10 @@ async function checkUserAndPassword(req, res, next) {
 async function checkUsernameFree(req, res, next) {
   try {
     const users = await User.findBy({ username: req.body.username });
-    if (!users) {
+    if (!users.length) {
       next();
     } else {
-      res.send("username taken")
-      next()
+      next(res.send("username taken"))
     }
   } catch (err) {
     next(err);
