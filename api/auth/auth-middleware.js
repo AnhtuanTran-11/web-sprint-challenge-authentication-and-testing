@@ -1,15 +1,13 @@
 const User = require("../jokes/jokes-model");
 
 async function checkUserAndPassword(req, res, next) {
-  try {
-    const users = await User.findBy({ username: req.body.username });
-    if (!users.length) {
-      next();
-    } else {
-      next({ message: "username taken"});
-    }
-  } catch (err) {
-    next(err);
+  const {username , password} = req.body
+  if (!username || !password) {
+    res.status(422).json({
+      message: "username and password required"
+    })
+  } else {
+    next()
   }
 }
 
