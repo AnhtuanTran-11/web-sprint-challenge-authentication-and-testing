@@ -77,7 +77,9 @@ router.post('/login', checkUsernameExists, (req, res, next) => {
           token: token,
         })
       } else {
-        next({ status: 401, message: 'invalid credentials'})
+        res.status(404).json({
+          message: "invalid credentials",
+        })
       }
 });
 
