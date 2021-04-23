@@ -20,7 +20,9 @@ async function checkUsernameFree(req, res, next) {
       next();
     } else {
       res.json({
-        message: "username taken"})
+        message: "username taken"
+      })
+      next()
     }
   } catch (err) {
     next(err);
