@@ -2,8 +2,11 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../../api/jokes/jokes-model')
+const {
+  checkUserAndPassword,
+} = require('./auth-middleware')
 
-router.post('/register', (req, res, next) => {
+router.post('/register', checkUserAndPassword, (req, res, next) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
