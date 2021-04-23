@@ -22,5 +22,5 @@ function checkPassword(req, res, next) {
 }
 
 module.exports = {
-  checkUsernameFree,
+  checkUserAndPassword
 };
