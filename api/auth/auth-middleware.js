@@ -1,8 +1,7 @@
 const User = require("../jokes/jokes-model");
 
-async function checkUserAndPassword(req, res, next) {
-  const { username, password } = req.body;
-  if (!username || !password) {
+function checkUserAndPassword(req, res, next) {
+  if (!req.body.username || !req.body.password) {
     res.status(422).json({
       message: "username and password required",
     });
@@ -34,6 +33,7 @@ async function checkUsernameExists(req, res, next) {
         message: "invalid credentials",
       });
     } else {
+      req.user = user
       next();
     }
   } catch (err) {
